@@ -5,4 +5,4 @@ use App\Http\Controllers\CarController;
 
 
 Route::get('/', [CarController::class,'index'])->name('index');
-Route::get('/listcar', [CarController::class,'list_car'])->name('listcar');
+Route::get('/listcar/{type}', [CarController::class,'list_car'])->name('listcar');
