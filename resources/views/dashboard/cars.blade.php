@@ -47,10 +47,10 @@
                         </div>
                         <div class="mb-3">
                             <label class="form-label fw-bold">فئة السيارة</label>
-                            <select class="form-select @error('type') is-invalid @enderror" name="type">
-                                <option value="sedan" {{ old('type') == 'sedan' ? 'selected' : '' }}>Sedan (سيدان)</option>
-                                <option value="SUV" {{ old('type') == 'suv' ? 'selected' : '' }}>SUV (عائلية)</option>
-                                <option value="sport" {{ old('type') == 'sport' ? 'selected' : '' }}>Sport (رياضية)</option>
+                            <select name="brand_id" class="form-select">
+                                @foreach ($brands as $brand)
+                                    <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="mb-3">
@@ -78,6 +78,7 @@
                                             <th>السعر</th>
                                             <th>التفاصيل</th>
                                             <th>الصورة</th>
+                                            <th>فئة السيارة</th>
                                             <th>الإجراءات</th>
                                         </tr>
                                     </thead>
@@ -87,7 +88,6 @@
                                             <td class="fw-bold text-muted">{{ $car->id }}</td>
                                             <td>
                                                 <div class="fw-bold text-primary">{{ $car->model_name }}</div>
-                                                <small class="badge bg-light text-dark border">{{ $car->type }}</small>
                                             </td>
                                             <td class="fw-bold text-success text-nowrap">{{ number_format($car->price) }} ريال</td>
                                             <td>
@@ -100,6 +100,7 @@
                                                     style="width: 80px; height: 50px; object-fit: cover;"
                                                     alt="{{ $car->model_name }}">
                                             </td>
+                                            <td>{{ $car->name }}</td>
                                             <td class="text-center">
                                                 <div class="btn-group shadow-sm" role="group">
                                                     <a href="{{ route('edit_car', ['id' => $car->id]) }}" class="btn btn-outline-primary btn-sm" title="تعديل">

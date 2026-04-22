@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Car;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -16,8 +17,9 @@ class DashboardController extends Controller
 
     public function get_cars(){
         
-        $cars = Car::all();
-        return view('dashboard.cars',compact('cars'));
+        $cars=DB::table('cars')->join('brands','cars.brand_id','=','brands.id')->select('cars.*','brands.name')->get();
+        $brands =DB::table('brands')->get();
+        return view('dashboard.cars',compact('cars','brands'));
     }
 
     public function add_brand(Request  $request){
@@ -56,7 +58,7 @@ class DashboardController extends Controller
         'year' => 'required',
         'color' => 'required',
         'price' => 'required',
-        'mileage' => 'required'
+        'mileage' => 'required',
         ];
 
         $message=[
@@ -78,11 +80,11 @@ class DashboardController extends Controller
         $request->validate($rule, $message);
 
         Car::create([
+            'brand_id' => $request->brand_id,
             'model_name'=> $request->model_name,
             'year'=> $request->year,
             'color'=> $request->color,
             'price'=> $request->price,
-            'type'=> $request->type,
             'mileage'=> $request->mileage,
             'image'=> $image_name
         ]);
