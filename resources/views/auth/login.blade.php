@@ -1,5 +1,5 @@
 login
-@extends('layouts.app_dash') {{-- أو أي Layout مخصص لصفحات الدخول --}}
+@extends('layouts.app') {{-- أو أي Layout مخصص لصفحات الدخول --}}
 
 @section('content')
 <div class="container">

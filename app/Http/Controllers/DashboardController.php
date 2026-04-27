@@ -6,9 +6,14 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use App\Models\Car;
 use Illuminate\Support\Facades\DB;
+use App\Actions\Fortify\CreateNewUser;
 
 class DashboardController extends Controller
-{
+{   
+    public function store_employee(Request $request,CreateNewUser $createNewUser){
+       $createNewUser->create($request->all());
+       return back();
+    }
     public function get_brands(){
 
         $brands = Brand::all();

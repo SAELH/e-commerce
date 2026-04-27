@@ -64,34 +64,8 @@
                             </button>
                         </div>
                     </form>
-
-                    <ul class="navbar-nav ms-3 align-items-center">
-                        <li class="nav-item dropdown me-3">
-                            <a class="nav-link position-relative" href="#" data-bs-toggle="dropdown">
-                                <i class="bi bi-bell fs-5"></i>
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">3+</span>
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-start shadow border-0">
-                                <li><a class="dropdown-item" href="#">طلب إضافة سيارة جديد</a></li>
-                                <li><a class="dropdown-item" href="#">تنبيه بنقص المخزون</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-center" href="#">عرض كل التنبيهات</a></li>
-                            </ul>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" data-bs-toggle="dropdown">
-                                <span class="ms-2 d-none d-lg-inline text-white-50 small">أحمد محمد</span>
-                                <img class="rounded-circle border border-secondary" src="https://via.placeholder.com/35" alt="User" width="35" height="35">
-                            </a>
-                            <ul class="dropdown-menu dropdown-menu-start shadow border-0">
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i> الملف الشخصي</a></li>
-                                <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i> الإعدادات</a></li>
-                                <li><hr class="dropdown-divider"></li>
-                                <li><a class="dropdown-item text-danger" href="#"><i class="bi bi-box-arrow-right me-2"></i> تسجيل الخروج</a></li>
-                            </ul>
-                        </li>
-                    </ul>
                 </div>
+                <span class="text-white">مرحبا {{ Auth::user()->name }}</span>
             </div>
         </nav>
     </header>
@@ -104,7 +78,7 @@
             
             <div class="list-group list-group-flush pr-0">
                 <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action bg-dark text-white border-0">
-                    <i class="bi bi-speedometer2 ms-2"></i> الإحصائيات
+                    <i class="bi bi-speedometer2 ms-2"></i> الرئيسية
                 </a>
 
                  <a href="{{ route('dashboard.brand') }}" class="list-group-item list-group-item-action bg-dark text-white border-0">
@@ -114,13 +88,10 @@
                   <a href="{{ route('dashboard.cars') }}" class="list-group-item list-group-item-action bg-dark text-white border-0">
                   <i class="bi bi-chevron-down small"></i>  السيارات
                 </a>
-               
-               
-                <div class="collapse ps-3 bg-black bg-opacity-25" id="carMenu">
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white-50 border-0 py-2">قائمة السيارات</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white-50 border-0 py-2">إضافة سيارة جديدة</a>
-                    <a href="#" class="list-group-item list-group-item-action bg-transparent text-white-50 border-0 py-2">تقارير المبيعات</a>
-                </div>
+
+                <a href="{{ route('add_employee') }}" class="list-group-item list-group-item-action bg-dark text-white border-0">
+                    <i class="bi bi-person-add"></i> تسجيل موظف جديد
+                </a>
 
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0">
                     <i class="bi bi-people ms-2"></i> العملاء
@@ -129,6 +100,14 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0 mt-auto">
                     <i class="bi bi-gear ms-2"></i> إعدادات النظام
                 </a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white border-0 mt-auto" 
+                    onclick="event.preventDefault(); document.getElementById('logout-form-sidebar').submit();">
+                    <i class="bi bi-box-arrow-left ms-2"></i> تسجيل الخروج
+                </a>
+
+                <form id="logout-form-sidebar" action="{{ route('logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
         </div>
 

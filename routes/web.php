@@ -4,14 +4,19 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CarController;
 use App\Http\Controllers\DashboardController;
 
+Route::get('/', [CarController::class,'index'])->name('index');
+Route::get('/listcar/{type}', [CarController::class,'list_car'])->name('listcar');
+
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard',function(){
         return view('dashboard.index');
     })->name('dashboard');
 
-    Route::get('/', [CarController::class,'index'])->name('index');
-    Route::get('/listcar/{type}', [CarController::class,'list_car'])->name('listcar');
+    Route::get('/add_employee',function() {
+        return view('auth.register');
+    })->name('add_employee');
 
+    Route::post('/store_employee',[DashBoardController::class,'store_employee'])->name('store_employee');
 
     Route::get('/dashboard/brand',[DashboardController::class,'get_brands'])->name('dashboard.brand');
     Route::get('/dashboard/cars',[DashboardController::class,'get_cars'])->name('dashboard.cars');

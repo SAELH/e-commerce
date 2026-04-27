@@ -28,18 +28,7 @@
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container">
             <a class="navbar-brand" href="#">🚗 معرض السيارات</a>
-            
-            <button class="navbar-toggler" data-bs-toggle="collapse" data-bs-target="#menu">
-            <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <div class="collapse navbar-collapse" id="menu">
-            <ul class="navbar-nav ms-auto">
-                <li class="nav-item"><a class="nav-link" href="#">الرئيسية</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">السيارات</a></li>
-                <li class="nav-item"><a class="nav-link" href="#">تواصل</a></li>
-            </ul>
-            </div>
+            <span class="text-white">{{ session('x') }}</span>
         </div>
         </nav>
     </header>
